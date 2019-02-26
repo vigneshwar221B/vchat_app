@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const msgSchema = require("./MessagingSchema");
 
 
 const userSchema = new mongoose.Schema({
@@ -31,15 +32,14 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-   clist:[]
-
+   clist:[msgSchema]
 
 
 });
 
 
 
- const User = mongoose.model("Item", userSchema);
+const User = mongoose.model("Item", userSchema);
 
 
 

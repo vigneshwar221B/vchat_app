@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 //All route handlers
 app.use(require("./routes/index.js"));
 app.use(require("./routes/handler.js"));
-app.use(require("./routes/listhandler.js"));
+app.use(require("./routes/chatHandler.js"));
 
 //404 page
 app.use((req, res, next) => {
