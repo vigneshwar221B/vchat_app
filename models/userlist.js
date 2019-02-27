@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
     uname: {
         type: String,
         required: true,
+        unique: true
 
     },
 
@@ -32,16 +33,15 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-   clist:[msgSchema]
-
+   msglist:[msgSchema],
+   
+   ulist: []
 
 });
 
 
 
 const User = mongoose.model("Item", userSchema);
-
-
 
 
 module.exports = User;

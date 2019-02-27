@@ -50,6 +50,7 @@ border-radius: 0 0 15px 15px !important;
     color:white !important;
     height: 60px !important;
     overflow-y: auto;
+    
 }
     .type_msg:focus{
      box-shadow:none !important;

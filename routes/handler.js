@@ -3,11 +3,18 @@ const router = express.Router();
 const User = require("../models/userlist");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-
+const Msglist = require("../models/MessagingSchema");
 router.post("/register", (req, res) => {
   let errors = [];
-  console.log(req.body);
-  const { uname, fname, lname, email, password } = req.body;
+
+
+  const {
+    uname,
+    fname,
+    lname,
+    email,
+    password
+  } = req.body;
 
   if (password.length < 6) {
     errors.push({
@@ -19,36 +26,63 @@ router.post("/register", (req, res) => {
     res.render("register", {
       errors
     });
+
   } else {
+
     User.findOne({
-      email: email
+
+      email: email,
+      uname: uname
+
     }).then(resUser => {
+
       if (resUser) {
         console.log("findOne gets executed!");
+
         errors.push({
-          msg: "Email has already registered!"
+          msg: "Email/Username has already registered!"
         });
+
         resUser.render("register", {
           errors
         });
+
       } else {
+
+
         const newUser = new User({
+
           fname: fname,
           lname: lname,
           uname: uname,
           email: email,
           password: password,
-          clist: []
+          ulist: ["temp user1", "temp user2"],
+          msglist: [{
+
+            name: "temp user1",
+            msg: ["hi!"]
+
+          }, {
+
+            name: "temp user2",
+            msg: ["hello"]
+
+          }
+        ]
+
         });
 
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
             newUser.password = hash;
+
             newUser
               .save()
               .then(user => {
-                console.log(user);
+                
+
                 req.flash(
                   "success_msg",
                   "You are now registered and can log in"
