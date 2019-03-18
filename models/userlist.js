@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const mongoose = require("mongoose");
 const msgSchema = require("./MessagingSchema");
 
@@ -35,11 +36,11 @@ const userSchema = new mongoose.Schema({
 
    msglist:[msgSchema],
    
-   ulist: []
+   ulist: [],
+
+   asocket: Object
 
 });
-
-
 
 const User = mongoose.model("Item", userSchema);
 

@@ -1,12 +1,17 @@
-const express = require("express");
+/*jshint esversion: 6 */
 
-const app = express();
-const mongoose = require("mongoose");
-const bodyparser = require("body-parser");
-const session = require("express-session");
-const flash = require("connect-flash");
-const passport = require('passport');
+var mongoose = require("mongoose"),
+    bodyparser = require("body-parser"),
+    session = require("express-session"),
+    flash = require("connect-flash"),
+    passport = require('passport'),
+    express = require('express'),
 
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server);
+
+const user = require("./models/userlist");
 //configuring passport
 
 require('./config/passport')(passport);
@@ -16,6 +21,9 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({
     extended: true
 }));
+//setting up socket.io
+
+app.set('socketio', io);
 
 
 //setting view engine
@@ -72,4 +80,7 @@ app.use((req, res, next) => {
 
 });
 
-app.listen(5000, () => console.log("server started at port 5000"));
+
+
+server.listen(5000);
+console.log("server started at 5000");

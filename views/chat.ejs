@@ -55,7 +55,7 @@
 									<div class="user_info">
 									<form action="/users/chat/user" method="POST">
 										<input type="hidden" name="user_name" value="<%= user %>" ></input>
-										<input type="hidden" name="user" value="user" ></input>
+										<input type="hidden" id="user" value="<%= current_user %>" ></input>
 										<a href="#" onclick="event.preventDefault();this.parentNode.submit()">
 											<span><%= user %></span>
 										</a>
@@ -69,13 +69,26 @@
 						
 							<% }); %>
 					</div>
-				
-					
 				</div>
 			</div>
 			
 		</div>
 	</div>
+
+
+
+
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		
+		var socket = io.connect("http://localhost:5000/users/chat/user");
+		var $user = $("#current_user");
+
+		socket.emit("new user",$user.val());
+
+	</script>
 
 </body>
 

@@ -1,13 +1,13 @@
+/*jshint esversion: 6 */
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userlist");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const Msglist = require("../models/MessagingSchema");
+
 router.post("/register", (req, res) => {
   let errors = [];
-
-
   const {
     uname,
     fname,
@@ -16,11 +16,11 @@ router.post("/register", (req, res) => {
     password
   } = req.body;
 
-  if (password.length < 6) {
-    errors.push({
-      msg: "Password must be at least 6 characters"
-    });
-  }
+  // if (password.length < 6) {
+  //   errors.push({
+  //     msg: "Password must be at least 6 characters"
+  //   });
+  // }
 
   if (errors.length > 0) {
     res.render("register", {
@@ -57,19 +57,9 @@ router.post("/register", (req, res) => {
           uname: uname,
           email: email,
           password: password,
-          ulist: ["temp user1", "temp user2"],
-          msglist: [{
-
-            name: "temp user1",
-            msg: ["hi!"]
-
-          }, {
-
-            name: "temp user2",
-            msg: ["hello"]
-
-          }
-        ]
+          ulist: [],
+          asocket: null,
+          msglist: []
 
         });
 
