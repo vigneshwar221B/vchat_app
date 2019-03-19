@@ -9,7 +9,8 @@ var mongoose = require("mongoose"),
 
     app = express(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server);
+    io = require('socket.io').listen(server),
+    allsockets = {};
 
 const user = require("./models/userlist");
 //configuring passport
@@ -21,10 +22,11 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({
     extended: true
 }));
-//setting up socket.io
+
+//setting up socket.io and socket variables
 
 app.set('socketio', io);
-
+app.set("all_sockets", allsockets);
 
 //setting view engine
 app.set("view engine", "ejs");
@@ -36,7 +38,8 @@ const db = require('./config/dbkeys').mongoURI;
 mongoose
     .connect(
         db, {
-            useNewUrlParser: true
+            useNewUrlParser: true,
+            autoIndex: false 
         }
 
     ).then(() => console.log('MongoDB Connected'))

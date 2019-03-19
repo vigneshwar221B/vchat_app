@@ -37,7 +37,7 @@ router.post("/register", (req, res) => {
     }).then(resUser => {
 
       if (resUser) {
-        console.log("findOne gets executed!");
+       
 
         errors.push({
           msg: "Email/Username has already registered!"

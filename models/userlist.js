@@ -2,7 +2,6 @@
 const mongoose = require("mongoose");
 const msgSchema = require("./MessagingSchema");
 
-
 const userSchema = new mongoose.Schema({
 
     fname: {
@@ -36,9 +35,7 @@ const userSchema = new mongoose.Schema({
 
    msglist:[msgSchema],
    
-   ulist: [],
-
-   asocket: Object
+   ulist: []
 
 });
 
